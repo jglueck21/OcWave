@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="40" x2="920" y2="990" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5b9dff"/><stop offset=".5" stop-color="#4338ca"/><stop offset="1" stop-color="#6d28d9"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="26%" cy="12%" r="78%">
+      <stop offset="0" stop-color="#fff" stop-opacity=".40"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="shade" cx="88%" cy="104%" r="82%">
+      <stop offset="0" stop-color="#1e1b4b" stop-opacity=".6"/><stop offset="1" stop-color="#1e1b4b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="up" x1="300" y1="190" x2="720" y2="700" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e3e9ff"/>
+    </linearGradient>
+    <linearGradient id="low" x1="0" y1="500" x2="0" y2="850" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7ae7ff"/><stop offset="1" stop-color="#2f8bff"/>
+    </linearGradient>
+    <clipPath id="disc"><circle cx="512" cy="512" r="338"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="228" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="228" fill="url(#shade)"/>
+  <rect width="1024" height="1024" rx="228" fill="url(#glow)"/>
+  <g clip-path="url(#disc)">
+    <path d="M 120 495 C 250 335, 400 335, 512 495 S 774 655, 904 495 L 904 0 L 120 0 Z" fill="url(#up)"/>
+
+    <g fill="none" stroke="#4338ca" stroke-opacity=".10" stroke-width="5">
+      <circle cx="512" cy="512" r="292"/><circle cx="512" cy="512" r="248"/><circle cx="512" cy="512" r="204"/>
+    </g>
+    <path d="M 120 529 C 250 369, 400 369, 512 529 S 774 689, 904 529 L 904 1024 L 120 1024 Z" fill="url(#low)"/>
+  </g>
+  <rect x="2" y="2" width="1020" height="1020" rx="226" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="4"/>
+</svg>
