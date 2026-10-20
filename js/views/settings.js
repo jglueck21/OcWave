@@ -38,7 +38,7 @@ function desktopPanel() {
         <p class="about-text">${t("Use OcWave as a desktop app with its own window and keyboard media keys. It keeps its own library, so use Backup to move your songs over. The installers are not code-signed yet: Windows may show a SmartScreen warning (More info, then Run anyway), and on a Mac you right-click the app and choose Open the first time.")}</p>
         <div class="download-row">
           ${order
-            .map((key, i) => `<a class="btn ${i === 0 ? "btn-primary" : ""}" href="${DOWNLOADS[key].href}" rel="noopener noreferrer">${icon("download")} ${t(DOWNLOADS[key].label)}</a>`)
+            .map((key, i) => `<a class="btn ${i === 0 ? "btn-primary" : ""}" href="${DOWNLOADS[key].href}" target="_blank" rel="noopener noreferrer">${icon("download")} ${t(DOWNLOADS[key].label)}</a>`)
             .join("")}
           <a class="btn" href="${DOWNLOADS.all}" target="_blank" rel="noopener noreferrer">${t("All downloads")}</a>
         </div>
