@@ -2,6 +2,19 @@
 // Written with AI help: native speakers are welcome to improve them.
 
 export const strings = {
+  "Keep your music safe": "Müziğini güvende tut",
+  "Safari can delete a website's data after about a week without use. Add OcWave to your Home Screen to keep your library safe.": "Safari, bir hafta kadar kullanılmayan bir web sitesinin verilerini silebilir. Kitaplığının korunması için OcWave'i Ana Ekrana ekle.",
+  "Install OcWave to keep your library safe and use it like an app, even offline.": "Kitaplığını güvende tutmak ve OcWave'i çevrimdışıyken bile bir uygulama gibi kullanmak için yükle.",
+  "Tap Share, then “Add to Home Screen”.": "Paylaş'a dokun, sonra “Ana Ekrana Ekle”yi seç.",
+  "Open the browser menu and choose “Install app”.": "Tarayıcı menüsünü aç ve “Uygulamayı yükle”yi seç.",
+  "Install": "Yükle",
+  "Not now": "Şimdi değil",
+  "Privacy": "Gizlilik",
+  "Everything stays on this device. Your songs, playlists and listening stats are stored in your browser and are never uploaded. OcWave has no accounts, no analytics and no tracking.": "Her şey bu cihazda kalır. Şarkıların, çalma listelerin ve dinleme istatistiklerin tarayıcında saklanır ve asla yüklenmez. OcWave'de hesap, analiz ya da takip yoktur.",
+  "The only thing that leaves your device is the optional lyrics lookup, which sends a song's title, artist and length to lrclib.net. You can turn it off under Lyrics.": "Cihazından çıkan tek şey, bir şarkının başlığını, sanatçısını ve süresini lrclib.net'e gönderen isteğe bağlı şarkı sözü aramasıdır. Bunu “Şarkı sözleri” bölümünden kapatabilirsin.",
+  "About": "Hakkında",
+  "Version {version}": "Sürüm {version}",
+  "Source code": "Kaynak kodu",
   ", ": ", ",
   ".": ".",
   "{h} hr {m} min": "{h} sa {m} dk",

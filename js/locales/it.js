@@ -2,6 +2,19 @@
 // Written with AI help: native speakers are welcome to improve them.
 
 export const strings = {
+  "Keep your music safe": "Metti al sicuro la tua musica",
+  "Safari can delete a website's data after about a week without use. Add OcWave to your Home Screen to keep your library safe.": "Safari può eliminare i dati di un sito web dopo circa una settimana di inutilizzo. Aggiungi OcWave alla schermata Home per conservare la tua libreria.",
+  "Install OcWave to keep your library safe and use it like an app, even offline.": "Installa OcWave per conservare la tua libreria e usarlo come un'app, anche offline.",
+  "Tap Share, then “Add to Home Screen”.": "Tocca Condividi, poi “Aggiungi alla schermata Home”.",
+  "Open the browser menu and choose “Install app”.": "Apri il menu del browser e scegli “Installa app”.",
+  "Install": "Installa",
+  "Not now": "Non ora",
+  "Privacy": "Privacy",
+  "Everything stays on this device. Your songs, playlists and listening stats are stored in your browser and are never uploaded. OcWave has no accounts, no analytics and no tracking.": "Tutto resta su questo dispositivo. I tuoi brani, le playlist e le statistiche di ascolto sono salvati nel browser e non vengono mai caricati. OcWave non ha account, analisi né tracciamento.",
+  "The only thing that leaves your device is the optional lyrics lookup, which sends a song's title, artist and length to lrclib.net. You can turn it off under Lyrics.": "L'unica cosa che lascia il tuo dispositivo è la ricerca facoltativa dei testi, che invia titolo, artista e durata di un brano a lrclib.net. Puoi disattivarla in “Testi”.",
+  "About": "Informazioni",
+  "Version {version}": "Versione {version}",
+  "Source code": "Codice sorgente",
   "{n} without playable audio": "{n} senza audio riproducibile",
   "Select": "Seleziona",
   "Select songs": "Seleziona brani",

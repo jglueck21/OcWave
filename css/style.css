@@ -4327,3 +4327,72 @@ button.rank-row:hover {
 .tracks.selecting {
   padding-bottom: 120px; /* keeps the last rows clear of the selection bar */
 }
+
+/* --------------------------- Install hint & about --------------------------- */
+.install-hint {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 16px;
+  margin: 0 0 18px;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(var(--accent-rgb), 0.16), var(--glass));
+  border: 1px solid rgba(var(--accent-rgb), 0.35);
+  box-shadow: var(--highlight);
+}
+.install-ic {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: rgba(var(--accent-rgb), 0.2);
+  color: var(--accent);
+}
+.install-ic .ms {
+  font-size: 26px;
+}
+.install-text strong {
+  display: block;
+  font-size: 1rem;
+}
+.install-text p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+.install-steps:not(:empty) {
+  display: block;
+  margin-top: 6px;
+  font-weight: 600;
+  color: var(--text);
+}
+.install-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+@media (max-width: 720px) {
+  .install-hint {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .install-actions {
+    grid-column: 1 / -1;
+    justify-content: stretch;
+  }
+  .install-actions .btn {
+    flex: 1;
+  }
+}
+.about-text {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+.about-text:first-of-type {
+  margin-top: 12px;
+}

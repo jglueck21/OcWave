@@ -2,6 +2,19 @@
 // Written with AI help: native speakers are welcome to improve them.
 
 export const strings = {
+  "Keep your music safe": "Mets ta musique à l'abri",
+  "Safari can delete a website's data after about a week without use. Add OcWave to your Home Screen to keep your library safe.": "Safari peut supprimer les données d'un site web après environ une semaine sans utilisation. Ajoute OcWave à l'écran d'accueil pour conserver ta bibliothèque.",
+  "Install OcWave to keep your library safe and use it like an app, even offline.": "Installe OcWave pour conserver ta bibliothèque et l'utiliser comme une application, même hors connexion.",
+  "Tap Share, then “Add to Home Screen”.": "Touche Partager, puis « Sur l'écran d'accueil ».",
+  "Open the browser menu and choose “Install app”.": "Ouvre le menu du navigateur et choisis « Installer l'application ».",
+  "Install": "Installer",
+  "Not now": "Pas maintenant",
+  "Privacy": "Confidentialité",
+  "Everything stays on this device. Your songs, playlists and listening stats are stored in your browser and are never uploaded. OcWave has no accounts, no analytics and no tracking.": "Tout reste sur cet appareil. Tes morceaux, playlists et statistiques d'écoute sont stockés dans ton navigateur et ne sont jamais envoyés. OcWave n'a ni compte, ni analyse, ni suivi.",
+  "The only thing that leaves your device is the optional lyrics lookup, which sends a song's title, artist and length to lrclib.net. You can turn it off under Lyrics.": "La seule chose qui quitte ton appareil est la recherche facultative des paroles, qui envoie le titre, l'artiste et la durée d'un morceau à lrclib.net. Tu peux la désactiver dans « Paroles ».",
+  "About": "À propos",
+  "Version {version}": "Version {version}",
+  "Source code": "Code source",
   ", ": ", ",
   ".": ".",
   "{h} hr {m} min": "{h} h {m} min",

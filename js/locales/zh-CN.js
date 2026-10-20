@@ -2,6 +2,19 @@
 // Written with AI help: native speakers are welcome to improve them.
 
 export const strings = {
+  "Keep your music safe": "保护好你的音乐",
+  "Safari can delete a website's data after about a week without use. Add OcWave to your Home Screen to keep your library safe.": "Safari 可能会在大约一周不使用后删除网站数据。将 OcWave 添加到主屏幕，即可保住你的曲库。",
+  "Install OcWave to keep your library safe and use it like an app, even offline.": "安装 OcWave，保护你的曲库，并像应用一样使用，离线也可用。",
+  "Tap Share, then “Add to Home Screen”.": "点按“分享”，然后选择“添加到主屏幕”。",
+  "Open the browser menu and choose “Install app”.": "打开浏览器菜单，然后选择“安装应用”。",
+  "Install": "安装",
+  "Not now": "暂不",
+  "Privacy": "隐私",
+  "Everything stays on this device. Your songs, playlists and listening stats are stored in your browser and are never uploaded. OcWave has no accounts, no analytics and no tracking.": "所有内容都保存在此设备上。你的歌曲、播放列表和收听统计都存储在浏览器中，绝不会被上传。OcWave 没有账号、没有分析、也没有跟踪。",
+  "The only thing that leaves your device is the optional lyrics lookup, which sends a song's title, artist and length to lrclib.net. You can turn it off under Lyrics.": "唯一会离开你设备的是可选的歌词查找：它会把歌曲的标题、艺人和时长发送到 lrclib.net。你可以在“歌词”设置中将其关闭。",
+  "About": "关于",
+  "Version {version}": "版本 {version}",
+  "Source code": "源代码",
   ", ": "、",
   ".": "。",
   "{h} hr {m} min": "{h} 小时 {m} 分钟",

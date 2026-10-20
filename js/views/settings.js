@@ -8,6 +8,7 @@ import {
   ACCENTS, EQ_BANDS, EQ_PRESETS, RECORDS, getAccent, getCrossfade, getDesign, getEq, getLyricsOnline, getMode, getNormalize, getRecord, getSleeve, getVisualizer, getWaveSeek,
   setAccent, setCrossfade, setDesign, setLyricsOnline, setMode, setNormalize, setRecord, setSleeve, setVisualizer, setWaveSeek,
 } from "../prefs.js";
+import { REPO_URL, VERSION } from "../version.js";
 import { confirmDialog, esc, fmtBytes, icon, plural, toast } from "../ui.js";
 
 const SHORTCUTS = [
@@ -132,6 +133,20 @@ export async function render(view) {
         <div class="setting-row">
           <div><strong>${t("Delete all data")}</strong><small>${t("Removes every playlist and song from this device")}</small></div>
           <button class="btn btn-danger-outline" id="wipe">${icon("delete_forever")} ${t("Delete everything")}</button>
+        </div>
+      </section>
+
+      <section class="panel about">
+        <h2>${t("Privacy")}</h2>
+        <p class="about-text">${t("Everything stays on this device. Your songs, playlists and listening stats are stored in your browser and are never uploaded. OcWave has no accounts, no analytics and no tracking.")}</p>
+        <p class="about-text">${t("The only thing that leaves your device is the optional lyrics lookup, which sends a song's title, artist and length to lrclib.net. You can turn it off under Lyrics.")}</p>
+      </section>
+
+      <section class="panel about">
+        <h2>${t("About")}</h2>
+        <div class="setting-row">
+          <div><strong>OcWave</strong><small>${t("Version {version}", { version: VERSION })}</small></div>
+          <a class="btn" href="${REPO_URL}" target="_blank" rel="noopener noreferrer">${icon("code")} ${t("Source code")}</a>
         </div>
       </section>
 

@@ -2,6 +2,19 @@
 // Written with AI help: native speakers are welcome to improve them.
 
 export const strings = {
+  "Keep your music safe": "음악을 안전하게 지키세요",
+  "Safari can delete a website's data after about a week without use. Add OcWave to your Home Screen to keep your library safe.": "Safari는 약 일주일 동안 사용하지 않으면 웹사이트 데이터를 삭제할 수 있어요. 라이브러리를 지키려면 OcWave를 홈 화면에 추가하세요.",
+  "Install OcWave to keep your library safe and use it like an app, even offline.": "OcWave를 설치하면 라이브러리를 안전하게 지키고 오프라인에서도 앱처럼 사용할 수 있어요.",
+  "Tap Share, then “Add to Home Screen”.": "공유를 누른 다음 “홈 화면에 추가”를 선택하세요.",
+  "Open the browser menu and choose “Install app”.": "브라우저 메뉴를 열고 “앱 설치”를 선택하세요.",
+  "Install": "설치",
+  "Not now": "나중에",
+  "Privacy": "개인정보 보호",
+  "Everything stays on this device. Your songs, playlists and listening stats are stored in your browser and are never uploaded. OcWave has no accounts, no analytics and no tracking.": "모든 데이터는 이 기기에 남아요. 곡, 재생목록, 감상 통계는 브라우저에 저장되며 업로드되지 않아요. OcWave에는 계정도, 분석도, 추적도 없어요.",
+  "The only thing that leaves your device is the optional lyrics lookup, which sends a song's title, artist and length to lrclib.net. You can turn it off under Lyrics.": "기기 밖으로 나가는 것은 선택 사항인 가사 검색뿐이에요. 곡의 제목, 아티스트, 길이가 lrclib.net으로 전송돼요. “가사” 설정에서 끌 수 있어요.",
+  "About": "정보",
+  "Version {version}": "버전 {version}",
+  "Source code": "소스 코드",
   ", ": ", ",
   ".": ".",
   "{h} hr {m} min": "{h}시간 {m}분",

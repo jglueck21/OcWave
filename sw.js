@@ -1,13 +1,19 @@
 // Service worker: keeps the app shell available offline.
 // App files use "network first" so updates show up right away, with the cache as the offline fallback.
-// Fonts use "stale while revalidate". Songs live in IndexedDB, so they are not handled here.
-const VERSION = "v12";
+// Fonts are self-hosted, so they are cached like any other app file. Songs live in IndexedDB, not here.
+const VERSION = "v14";
 const CACHE = `ocwave-${VERSION}`;
 const SHELL = [
   "./",
   "index.html",
   "manifest.webmanifest",
   "css/style.css",
+  "css/fonts.css",
+  "assets/fonts/inter-latin.woff2",
+  "assets/fonts/inter-latin-ext.woff2",
+  "assets/fonts/inter-cyrillic.woff2",
+  "assets/fonts/inter-cyrillic-ext.woff2",
+  "assets/fonts/material-symbols-rounded.woff2",
   "assets/logo.svg",
   "assets/logo.png",
   "assets/icon-192.png",
@@ -38,6 +44,7 @@ const SHELL = [
   "js/player.js",
   "js/prefs.js",
   "js/stats.js",
+  "js/version.js",
   "js/visualizer.js",
   "js/waveform.js",
   "js/ui.js",
@@ -85,21 +92,5 @@ self.addEventListener("fetch", (event) => {
         .catch(() => caches.match(request).then((hit) => hit || (request.mode === "navigate" ? caches.match("index.html") : Response.error())))
     );
     return;
-  }
-
-  // Google Fonts (stylesheets and font files).
-  if (/fonts\.(googleapis|gstatic)\.com$/.test(url.hostname)) {
-    event.respondWith(
-      caches.open(CACHE).then(async (cache) => {
-        const cached = await cache.match(request);
-        const fresh = fetch(request)
-          .then((response) => {
-            cache.put(request, response.clone());
-            return response;
-          })
-          .catch(() => cached);
-        return cached || fresh;
-      })
-    );
   }
 });

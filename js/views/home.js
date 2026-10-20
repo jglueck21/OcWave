@@ -2,6 +2,7 @@ import * as db from "../db.js";
 import { formatDate, t } from "../i18n.js";
 import * as player from "../player.js";
 import * as stats from "../stats.js";
+import * as install from "../install.js";
 import { displayArtist, esc, fmtTime, icon, plural } from "../ui.js";
 import { collectionSongs, collectionTile, coverOf, createPlaylistFlow, playPlaylist, statsTile, tintCards } from "./library.js";
 
@@ -9,6 +10,25 @@ const greeting = () => {
   const hour = new Date().getHours();
   return hour < 5 ? t("Good night") : hour < 12 ? t("Good morning") : hour < 18 ? t("Good afternoon") : t("Good evening");
 };
+
+// A dismissible card that asks phone users to install the app so Safari doesn't clear their library.
+function installHint() {
+  const ios = install.platform() === "ios";
+  const steps = ios ? t("Tap Share, then “Add to Home Screen”.") : t("Open the browser menu and choose “Install app”.");
+  return `
+    <section class="install-hint" aria-label="${esc(t("Keep your music safe"))}">
+      <span class="install-ic">${icon(ios ? "ios_share" : "install_mobile")}</span>
+      <div class="install-text">
+        <strong>${t("Keep your music safe")}</strong>
+        <p>${ios ? t("Safari can delete a website's data after about a week without use. Add OcWave to your Home Screen to keep your library safe.") : t("Install OcWave to keep your library safe and use it like an app, even offline.")}</p>
+        <small class="muted install-steps">${install.canPrompt() ? "" : steps}</small>
+      </div>
+      <div class="install-actions">
+        ${install.canPrompt() ? `<button class="btn btn-primary" data-act="install">${t("Install")}</button>` : ""}
+        <button class="btn" data-act="hint-dismiss">${t("Not now")}</button>
+      </div>
+    </section>`;
+}
 
 export async function render(view) {
   const [allPlaylists, songs] = await Promise.all([db.getPlaylists(), db.getAllSongs()]);
@@ -31,6 +51,8 @@ export async function render(view) {
         <a class="btn" href="#/search">${icon("search")} ${t("Search")}</a>
       </div>
     </section>
+
+    ${songCount && install.shouldHint() ? installHint() : ""}
 
     <div class="home-grid" ${playlists.length ? "" : "hidden"}>
       <section class="quick" aria-label="${t("Quick picks")}">
@@ -201,6 +223,10 @@ export async function render(view) {
   view.addEventListener("click", (event) => {
     const act = event.target.closest("[data-act]")?.dataset.act;
     if (act === "new") return createPlaylistFlow();
+    if (act === "hint-dismiss") return (install.dismiss(), view.querySelector(".install-hint")?.remove());
+    if (act === "install") {
+      return install.promptInstall().then((accepted) => accepted && view.querySelector(".install-hint")?.remove());
+    }
     if (act === "toggle") return player.togglePlay();
     if (act === "stack-play") return playPlaylist(playlists[focused]);
     if (act === "stack-open") return (location.hash = `#/playlist/${playlists[focused].id}`);

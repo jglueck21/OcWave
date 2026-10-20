@@ -60,7 +60,7 @@ export async function addListening(id, seconds) {
 }
 
 // Waveform peaks (an array of small integers) used by the player's seek bar.
-export const waveOf = (id) => stats.get(id).wave || null;
+export const waveOf = (id) => stats.get(id)?.wave || null; // a song that was never played has no record yet
 export async function setWave(id, wave) {
   const next = await db.updateStats(id, (s) => ({ ...s, wave }));
   stats.set(id, next);
@@ -74,7 +74,7 @@ export async function setLoudness(id, loudness, peak) {
 
 // Songs sorted by a criterion, restricted to the given list of songs.
 export function favorites(songs) {
-  return songs.filter((s) => isFavorite(s.id)).sort((a, b) => (stats.get(b.id).likedAt || 0) - (stats.get(a.id).likedAt || 0));
+  return songs.filter((s) => isFavorite(s.id)).sort((a, b) => (get(b.id).likedAt || 0) - (get(a.id).likedAt || 0));
 }
 export function recent(songs, limit = 50) {
   return songs.filter((s) => lastPlayed(s.id) > 0).sort((a, b) => lastPlayed(b.id) - lastPlayed(a.id)).slice(0, limit);

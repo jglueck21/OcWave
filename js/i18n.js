@@ -57,16 +57,6 @@ function detect() {
   return "en";
 }
 
-// Japanese and Chinese need their own web font (Inter has no CJK glyphs and system fonts vary).
-const CJK_FONTS = { ja: "Noto+Sans+JP", "zh-CN": "Noto+Sans+SC", "zh-TW": "Noto+Sans+TC", ko: "Noto+Sans+KR" };
-function loadCjkFont(family) {
-  const link = Object.assign(document.createElement("link"), {
-    rel: "stylesheet",
-    href: `https://fonts.googleapis.com/css2?family=${family}:wght@400;500;700;800&display=swap`,
-  });
-  document.head.appendChild(link);
-}
-
 // Loads the language files and translates the static text in index.html. Call once before rendering.
 export async function init() {
   const preference = getPreference();
@@ -83,7 +73,6 @@ export async function init() {
     }
   }
   document.documentElement.lang = current;
-  if (CJK_FONTS[current]) loadCjkFont(CJK_FONTS[current]);
   translateStatic();
 }
 

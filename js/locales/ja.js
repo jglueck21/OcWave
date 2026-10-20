@@ -2,6 +2,19 @@
 // Written with AI help: native speakers are welcome to improve them.
 
 export const strings = {
+  "Keep your music safe": "音楽を守りましょう",
+  "Safari can delete a website's data after about a week without use. Add OcWave to your Home Screen to keep your library safe.": "Safariは、1週間ほど使わないとウェブサイトのデータを削除することがあります。ライブラリを守るため、OcWaveをホーム画面に追加してください。",
+  "Install OcWave to keep your library safe and use it like an app, even offline.": "OcWaveをインストールすると、ライブラリを守り、オフラインでもアプリのように使えます。",
+  "Tap Share, then “Add to Home Screen”.": "「共有」をタップして、「ホーム画面に追加」を選んでください。",
+  "Open the browser menu and choose “Install app”.": "ブラウザのメニューを開き、「アプリをインストール」を選んでください。",
+  "Install": "インストール",
+  "Not now": "今はしない",
+  "Privacy": "プライバシー",
+  "Everything stays on this device. Your songs, playlists and listening stats are stored in your browser and are never uploaded. OcWave has no accounts, no analytics and no tracking.": "すべてのデータはこのデバイスに保存されます。曲、プレイリスト、再生統計はブラウザ内に保存され、アップロードされることはありません。OcWaveにはアカウントも、分析も、トラッキングもありません。",
+  "The only thing that leaves your device is the optional lyrics lookup, which sends a song's title, artist and length to lrclib.net. You can turn it off under Lyrics.": "デバイスの外に送られるのは、任意の歌詞検索だけです。曲のタイトル、アーティスト、長さがlrclib.netに送信されます。「歌詞」の設定でオフにできます。",
+  "About": "このアプリについて",
+  "Version {version}": "バージョン {version}",
+  "Source code": "ソースコード",
   "{n} without playable audio": "再生できる音声がないファイル: {n}",
   "Select": "選択",
   "Select songs": "曲を選択",

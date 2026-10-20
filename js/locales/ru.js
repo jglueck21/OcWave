@@ -2,6 +2,19 @@
 // Written with AI help: native speakers are welcome to improve them.
 
 export const strings = {
+  "Keep your music safe": "Сохраните свою музыку",
+  "Safari can delete a website's data after about a week without use. Add OcWave to your Home Screen to keep your library safe.": "Safari может удалить данные сайта примерно через неделю без использования. Добавьте OcWave на экран «Домой», чтобы ваша медиатека сохранилась.",
+  "Install OcWave to keep your library safe and use it like an app, even offline.": "Установите OcWave, чтобы сохранить медиатеку и пользоваться им как приложением, даже без интернета.",
+  "Tap Share, then “Add to Home Screen”.": "Нажмите «Поделиться», затем «На экран „Домой“».",
+  "Open the browser menu and choose “Install app”.": "Откройте меню браузера и выберите «Установить приложение».",
+  "Install": "Установить",
+  "Not now": "Не сейчас",
+  "Privacy": "Конфиденциальность",
+  "Everything stays on this device. Your songs, playlists and listening stats are stored in your browser and are never uploaded. OcWave has no accounts, no analytics and no tracking.": "Всё остаётся на этом устройстве. Ваши треки, плейлисты и статистика прослушивания хранятся в браузере и никогда не загружаются. В OcWave нет аккаунтов, аналитики и слежки.",
+  "The only thing that leaves your device is the optional lyrics lookup, which sends a song's title, artist and length to lrclib.net. You can turn it off under Lyrics.": "Единственное, что покидает ваше устройство, — необязательный поиск текстов песен: он отправляет название, исполнителя и длительность трека на lrclib.net. Его можно отключить в разделе «Текст песни».",
+  "About": "О приложении",
+  "Version {version}": "Версия {version}",
+  "Source code": "Исходный код",
   ", ": ", ",
   ".": ".",
   "{h} hr {m} min": "{h} ч {m} мин",
