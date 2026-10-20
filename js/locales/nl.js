@@ -2,6 +2,12 @@
 // Written with AI help: native speakers are welcome to improve them.
 
 export const strings = {
+  "Desktop app": "Desktop-app",
+  "Use OcWave as a desktop app with its own window and keyboard media keys. It keeps its own library, so use Backup to move your songs over. The installers are not code-signed yet: Windows may show a SmartScreen warning (More info, then Run anyway), and on a Mac you right-click the app and choose Open the first time.": "Gebruik OcWave als desktop-app met een eigen venster en mediatoetsen. De app heeft een eigen bibliotheek, dus gebruik de back-up om je nummers over te zetten. De installatieprogramma's zijn nog niet ondertekend: Windows kan een SmartScreen-waarschuwing tonen (“Meer info”, dan “Toch uitvoeren”) en op een Mac klik je de eerste keer met de rechtermuisknop op de app en kies je “Open”.",
+  "Download for Windows (.exe)": "Downloaden voor Windows (.exe)",
+  "Download for Mac, Apple Silicon (.dmg)": "Downloaden voor Mac, Apple Silicon (.dmg)",
+  "Download for Mac, Intel (.dmg)": "Downloaden voor Mac, Intel (.dmg)",
+  "All downloads": "Alle downloads",
   "Word-by-word highlighting": "Woord voor woord markeren",
   "Highlights each word as it is sung. The timing is estimated unless the lyrics file has word timings.": "Markeert elk woord terwijl het wordt gezongen. De timing is geschat, tenzij het songtekstbestand woordtijden bevat.",
   "Keep your music safe": "Houd je muziek veilig",

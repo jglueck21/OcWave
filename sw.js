@@ -1,7 +1,7 @@
 // Service worker: keeps the app shell available offline.
 // App files use "network first" so updates show up right away, with the cache as the offline fallback.
 // Fonts are self-hosted, so they are cached like any other app file. Songs live in IndexedDB, not here.
-const VERSION = "v17";
+const VERSION = "v18";
 const CACHE = `ocwave-${VERSION}`;
 const SHELL = [
   "./",

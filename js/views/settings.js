@@ -8,7 +8,7 @@ import {
   ACCENTS, EQ_BANDS, EQ_PRESETS, RECORDS, getAccent, getCrossfade, getDesign, getEq, getLyricsOnline, getLyricsWords, getMode, getNormalize, getRecord, getSleeve, getVisualizer, getWaveSeek,
   setAccent, setCrossfade, setDesign, setLyricsOnline, setLyricsWords, setMode, setNormalize, setRecord, setSleeve, setVisualizer, setWaveSeek,
 } from "../prefs.js";
-import { REPO_URL, VERSION } from "../version.js";
+import { DOWNLOADS, REPO_URL, VERSION } from "../version.js";
 import { confirmDialog, esc, fmtBytes, icon, plural, toast } from "../ui.js";
 
 const SHORTCUTS = [
@@ -26,6 +26,24 @@ const switchHtml = (id, label, hint) => `
     <div><strong>${t(label)}</strong><small>${t(hint)}</small></div>
     <label class="switch"><input type="checkbox" id="${id}" role="switch" aria-label="${esc(t(label))}"><span></span></label>
   </div>`;
+
+// "Desktop app" panel: download links for the installers (not shown inside the desktop app itself).
+function desktopPanel() {
+  if (/Electron/i.test(navigator.userAgent)) return "";
+  const mac = /Mac/i.test(navigator.platform || navigator.userAgent) && !/iPhone|iPad/.test(navigator.userAgent);
+  const order = mac ? ["macArm", "macIntel", "windows"] : ["windows", "macArm", "macIntel"]; // the visitor's own system first
+  return `
+      <section class="panel about">
+        <h2>${t("Desktop app")}</h2>
+        <p class="about-text">${t("Use OcWave as a desktop app with its own window and keyboard media keys. It keeps its own library, so use Backup to move your songs over. The installers are not code-signed yet: Windows may show a SmartScreen warning (More info, then Run anyway), and on a Mac you right-click the app and choose Open the first time.")}</p>
+        <div class="download-row">
+          ${order
+            .map((key, i) => `<a class="btn ${i === 0 ? "btn-primary" : ""}" href="${DOWNLOADS[key].href}" rel="noopener noreferrer">${icon("download")} ${t(DOWNLOADS[key].label)}</a>`)
+            .join("")}
+          <a class="btn" href="${DOWNLOADS.all}" target="_blank" rel="noopener noreferrer">${t("All downloads")}</a>
+        </div>
+      </section>`;
+}
 
 export async function render(view) {
   view.innerHTML = `
@@ -136,6 +154,8 @@ export async function render(view) {
           <button class="btn btn-danger-outline" id="wipe">${icon("delete_forever")} ${t("Delete everything")}</button>
         </div>
       </section>
+
+      ${desktopPanel()}
 
       <section class="panel about">
         <h2>${t("Privacy")}</h2>

@@ -2,6 +2,12 @@
 // Written with AI help: native speakers are welcome to improve them.
 
 export const strings = {
+  "Desktop app": "デスクトップアプリ",
+  "Use OcWave as a desktop app with its own window and keyboard media keys. It keeps its own library, so use Backup to move your songs over. The installers are not code-signed yet: Windows may show a SmartScreen warning (More info, then Run anyway), and on a Mac you right-click the app and choose Open the first time.": "OcWaveを専用ウィンドウとキーボードのメディアキーに対応したデスクトップアプリとして使えます。ライブラリは別になるため、曲の移行にはバックアップを使ってください。インストーラーにはまだ署名がないため、Windowsではスマートスクリーンの警告(「詳細情報」→「実行」)が表示されることがあり、Macでは初回のみアプリを右クリックして「開く」を選びます。",
+  "Download for Windows (.exe)": "Windows版をダウンロード(.exe)",
+  "Download for Mac, Apple Silicon (.dmg)": "Mac版(Apple Silicon)をダウンロード(.dmg)",
+  "Download for Mac, Intel (.dmg)": "Mac版(Intel)をダウンロード(.dmg)",
+  "All downloads": "すべてのダウンロード",
   "Word-by-word highlighting": "単語ごとにハイライト",
   "Highlights each word as it is sung. The timing is estimated unless the lyrics file has word timings.": "歌われている単語を1つずつハイライトします。歌詞ファイルに単語ごとのタイミングがない場合、タイミングは推定されます。",
   "Keep your music safe": "音楽を守りましょう",

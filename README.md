@@ -63,6 +63,12 @@ to move a library between them.
 
 Space play/pause · ← → seek · N / P next / previous · S shuffle · R repeat · M mute · Q queue · L lyrics · / search
 
+## Desktop app (macOS and Windows)
+
+`desktop/` wraps the web app in an Electron window and builds a `.dmg` and an `.exe`. Releases are built automatically
+by GitHub Actions when you push a version tag, and Settings → Desktop app links to the latest installers. See
+[desktop/README.md](desktop/README.md).
+
 ## Adding or fixing a translation
 
 Every piece of text in the code is written in English, for example `t("Add songs")`. `js/i18n.js` looks the English

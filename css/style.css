@@ -4416,3 +4416,10 @@ button.rank-row:hover {
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
+
+.download-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 16px;
+}

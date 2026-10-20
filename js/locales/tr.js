@@ -2,6 +2,12 @@
 // Written with AI help: native speakers are welcome to improve them.
 
 export const strings = {
+  "Desktop app": "Masaüstü uygulaması",
+  "Use OcWave as a desktop app with its own window and keyboard media keys. It keeps its own library, so use Backup to move your songs over. The installers are not code-signed yet: Windows may show a SmartScreen warning (More info, then Run anyway), and on a Mac you right-click the app and choose Open the first time.": "OcWave'i kendi penceresi ve klavye medya tuşlarıyla masaüstü uygulaması olarak kullan. Kendi kitaplığı vardır, bu yüzden şarkılarını taşımak için yedeği kullan. Yükleyiciler henüz imzalı değil: Windows bir SmartScreen uyarısı gösterebilir (“Daha fazla bilgi”, ardından “Yine de çalıştır”), Mac'te ise ilk seferde uygulamaya sağ tıklayıp “Aç”ı seçmelisin.",
+  "Download for Windows (.exe)": "Windows için indir (.exe)",
+  "Download for Mac, Apple Silicon (.dmg)": "Mac için indir, Apple Silicon (.dmg)",
+  "Download for Mac, Intel (.dmg)": "Mac için indir, Intel (.dmg)",
+  "All downloads": "Tüm indirmeler",
   "Word-by-word highlighting": "Kelime kelime vurgulama",
   "Highlights each word as it is sung. The timing is estimated unless the lyrics file has word timings.": "Her kelimeyi söylendiği anda vurgular. Şarkı sözü dosyasında kelime zamanlamaları yoksa zamanlama tahminidir.",
   "Keep your music safe": "Müziğini güvende tut",
