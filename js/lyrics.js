@@ -7,19 +7,78 @@ const API = "https://lrclib.net/api";
 const RETRY_AFTER_MS = 7 * 24 * 60 * 60 * 1000; // don't re-query songs without lyrics for a week
 
 const TIME_TAG = /\[(\d+):(\d+)(?:[.:](\d+))?\]/g;
+const WORD_TAG = /<(\d+):(\d+)(?:[.:](\d+))?>/g; // "enhanced LRC": <00:12.50>word <00:12.90>word
 
-// Parses LRC text into [{ t, text }] sorted by time, or null when it has no timestamps.
+const seconds = (min, sec, frac = "0") => Number(min) * 60 + Number(sec) + Number(`0.${frac}`);
+const CJK = /[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]/;
+
+// Splits a line with word tags into [{ t, text }]. Text before the first tag starts with the line.
+function parseWords(content, lineTime) {
+  const tags = [...content.matchAll(WORD_TAG)];
+  if (!tags.length) return null;
+  const words = [];
+  const add = (time, text) => text.trim() && words.push({ t: time, text: text.trim() });
+  add(lineTime, content.slice(0, tags[0].index));
+  tags.forEach((tag, i) => {
+    const end = i + 1 < tags.length ? tags[i + 1].index : content.length;
+    add(seconds(tag[1], tag[2], tag[3]), content.slice(tag.index + tag[0].length, end));
+  });
+  return words.length ? words : null;
+}
+
+// Parses LRC text into [{ t, text, words? }] sorted by time, or null when it has no timestamps.
+// `words` is only present for enhanced LRC lines that carry per-word timestamps.
 export function parseLrc(text) {
   const lines = [];
   for (const raw of text.split(/\r?\n/)) {
     const times = [...raw.matchAll(TIME_TAG)];
     if (!times.length) continue;
     const content = raw.replace(TIME_TAG, "").trim();
-    for (const [, min, sec, frac = "0"] of times) {
-      lines.push({ t: Number(min) * 60 + Number(sec) + Number(`0.${frac}`), text: content });
+    for (const [, min, sec, frac] of times) {
+      const t = seconds(min, sec, frac);
+      const words = parseWords(content, t);
+      lines.push(words ? { t, text: words.map((w) => w.text).join(CJK.test(content) ? "" : " "), words } : { t, text: content });
     }
   }
   return lines.length ? lines.sort((a, b) => a.t - b.t) : null;
+}
+
+/**
+ * The words of line `i` with the time each one starts and ends: [{ text, s, e, space }].
+ * Real timestamps are used when the lyrics have them (enhanced LRC). Otherwise the line is split into words and
+ * the time until the next line is shared out by word length, assuming a natural singing pace, so the highlight
+ * glides across the line. LRCLIB only provides line timing, so this estimate is what most songs get.
+ */
+export function lineWords(lines, i, duration = 0) {
+  const line = lines[i];
+  if (!line?.text) return [];
+  const next = lines[i + 1]?.t ?? (duration > line.t ? duration : line.t + 5);
+  const spaced = !CJK.test(line.text);
+
+  if (line.words?.length) {
+    return line.words.map((word, k) => ({
+      text: word.text,
+      s: word.t,
+      e: line.words[k + 1]?.t ?? Math.min(next, word.t + 1.2),
+      space: spaced,
+    }));
+  }
+
+  // No spaces in Chinese, Japanese and Korean lyrics: highlight character by character.
+  const tokens = spaced ? line.text.split(/\s+/).filter(Boolean) : Array.from(line.text.replace(/\s+/g, ""));
+  const gap = Math.max(0.4, next - line.t);
+  // Seconds the line is actually sung: most of the time until the next line (singers rarely rush), but a short line
+  // before a long break doesn't last the whole break (3 characters per second is a very slow ballad).
+  const sung = Math.min(gap * 0.9, Math.max(1.5, line.text.length / 3));
+  const weights = tokens.map((token) => (spaced ? token.length + 1 : 1));
+  const total = weights.reduce((a, b) => a + b, 0);
+  let cursor = line.t;
+  return tokens.map((token, k) => {
+    const length = (weights[k] / total) * sung;
+    const word = { text: token, s: cursor, e: cursor + length, space: spaced };
+    cursor += length;
+    return word;
+  });
 }
 
 // Builds the stored lyrics object from raw text (plain or LRC).

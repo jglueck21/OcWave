@@ -113,6 +113,10 @@ export function setSleeve(on) {
 export const getLyricsOnline = () => read("ocwave.lyricsOnline", "1") === "1";
 export const setLyricsOnline = (on) => write("ocwave.lyricsOnline", on ? "1" : "0");
 
+// Highlight each word as it is sung (instead of the whole line).
+export const getLyricsWords = () => read("ocwave.lyricsWords", "1") === "1";
+export const setLyricsWords = (on) => write("ocwave.lyricsWords", on ? "1" : "0");
+
 // Crossfade length in seconds (0 = off).
 export const getCrossfade = () => Math.min(12, Math.max(0, Number(read("ocwave.crossfade", "0")) || 0));
 export const setCrossfade = (seconds) => write("ocwave.crossfade", String(seconds));

@@ -2,6 +2,8 @@
 // Written with AI help: native speakers are welcome to improve them.
 
 export const strings = {
+  "Word-by-word highlighting": "Kelime kelime vurgulama",
+  "Highlights each word as it is sung. The timing is estimated unless the lyrics file has word timings.": "Her kelimeyi söylendiği anda vurgular. Şarkı sözü dosyasında kelime zamanlamaları yoksa zamanlama tahminidir.",
   "Keep your music safe": "Müziğini güvende tut",
   "Safari can delete a website's data after about a week without use. Add OcWave to your Home Screen to keep your library safe.": "Safari, bir hafta kadar kullanılmayan bir web sitesinin verilerini silebilir. Kitaplığının korunması için OcWave'i Ana Ekrana ekle.",
   "Install OcWave to keep your library safe and use it like an app, even offline.": "Kitaplığını güvende tutmak ve OcWave'i çevrimdışıyken bile bir uygulama gibi kullanmak için yükle.",

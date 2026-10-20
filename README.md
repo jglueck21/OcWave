@@ -26,6 +26,7 @@ to move a library between them.
 - **Sound:** five-band equalizer with presets, optional volume normalisation (songs are measured once, EBU R128 style, and played at an even loudness).
 - **Playlists:** drag rows by their grip (mouse or touch), sort by title/artist/album/duration/date with Undo, and select several songs for bulk actions (queue, add to playlist, like, remove, delete).
 - **Stats:** a listening stats page (time per day/week, plays, streak, top songs/artists/albums, time of day), kept on the device.
+- **Lyrics:** synced lyrics from LRCLIB or a `.lrc` file, with word-by-word highlighting (real word timing from enhanced LRC `<mm:ss.xx>` tags; otherwise estimated per line).
 - **Visuals:** live frequency visualiser and a waveform seek bar in the full player; per-song cover editing (change or remove a cover from any song menu).
 - **Backup:** export everything (audio included) to one `.ocwave` file and restore it later.
 - **Offline & install:** a service worker caches the app; works as an installable app on supported browsers. On phones the Home page suggests installing it, because Safari can clear a site's data after about a week without use (installed Home Screen apps are exempt).

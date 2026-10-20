@@ -2,6 +2,8 @@
 // Written with AI help: native speakers are welcome to improve them.
 
 export const strings = {
+  "Word-by-word highlighting": "単語ごとにハイライト",
+  "Highlights each word as it is sung. The timing is estimated unless the lyrics file has word timings.": "歌われている単語を1つずつハイライトします。歌詞ファイルに単語ごとのタイミングがない場合、タイミングは推定されます。",
   "Keep your music safe": "音楽を守りましょう",
   "Safari can delete a website's data after about a week without use. Add OcWave to your Home Screen to keep your library safe.": "Safariは、1週間ほど使わないとウェブサイトのデータを削除することがあります。ライブラリを守るため、OcWaveをホーム画面に追加してください。",
   "Install OcWave to keep your library safe and use it like an app, even offline.": "OcWaveをインストールすると、ライブラリを守り、オフラインでもアプリのように使えます。",

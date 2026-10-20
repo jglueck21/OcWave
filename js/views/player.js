@@ -1,9 +1,9 @@
 import { t } from "../i18n.js";
-import { importLyricsFile, loadLyrics } from "../lyrics.js";
+import { importLyricsFile, lineWords, loadLyrics } from "../lyrics.js";
 import * as db from "../db.js";
 import * as player from "../player.js";
 import * as stats from "../stats.js";
-import { getDesign, getVisualizer, getWaveSeek, setDesign, setLyricsOnline, setVisualizer } from "../prefs.js";
+import { getDesign, getLyricsWords, getVisualizer, getWaveSeek, setDesign, setLyricsOnline, setVisualizer } from "../prefs.js";
 import { createVisualizer } from "../visualizer.js";
 import { BARS, getWaveform } from "../waveform.js";
 import { bindSlider, displayArtist, eqBars, esc, fmtTime, formDialog, icon, openMenu, plural, toast } from "../ui.js";
@@ -306,7 +306,7 @@ export function render(view) {
     $("#queue-btn").classList.toggle("on", isOpen(queue));
     $("#lyrics-btn").classList.toggle("on", isOpen(lyricsDrawer));
     if (open && drawer === queue) queue.querySelector(".current")?.scrollIntoView({ block: "center" });
-    if (open && drawer === lyricsDrawer) ensureLyrics();
+    if (open && drawer === lyricsDrawer) (ensureLyrics(), wakeWords());
   };
   $("#queue-btn").addEventListener("click", () => setDrawer(queue, !isOpen(queue)));
   $("#lyrics-btn").addEventListener("click", () => setDrawer(lyricsDrawer, !isOpen(lyricsDrawer)));
@@ -424,8 +424,19 @@ export function render(view) {
       const data = lyrics.data;
       if (data.instrumental) lyricsBody.innerHTML = `<div class="lyrics-msg">${icon("piano")}<h3>${t("Instrumental")}</h3><p>${t("This song has no lyrics.")}</p></div>`;
       else if (data.synced) {
-        lyricsBody.innerHTML = `<div class="lyric-lines">${data.synced
-          .map((line, i) => `<p class="lyric-line ${line.text ? "" : "gap"}" data-i="${i}" data-t="${line.t}">${esc(line.text) || "♪"}</p>`)
+        const withWords = getLyricsWords();
+        const duration = player.getTime().duration;
+        // Each word is its own span with its start/end time, so the highlight can follow the singing.
+        const lineHtml = (line, i) => {
+          if (!line.text) return "♪";
+          if (!withWords) return esc(line.text);
+          return lineWords(data.synced, i, duration)
+            .map((w) => `<span class="w" data-s="${w.s.toFixed(2)}" data-e="${w.e.toFixed(2)}">${esc(w.text)}</span>${w.space ? " " : ""}`)
+            .join("")
+            .trim();
+        };
+        lyricsBody.innerHTML = `<div class="lyric-lines ${withWords ? "word-sync" : ""}">${data.synced
+          .map((line, i) => `<p class="lyric-line ${line.text ? "" : "gap"}" data-i="${i}" data-t="${line.t}">${lineHtml(line, i)}</p>`)
           .join("")}</div>`;
       } else lyricsBody.innerHTML = `<pre class="lyric-plain">${esc(data.plain)}</pre>`;
     } else lyricsBody.innerHTML = html ?? "";
@@ -443,17 +454,44 @@ export function render(view) {
       if (lines[mid].t <= time + 0.2) (found = mid), (lo = mid + 1);
       else hi = mid - 1;
     }
-    if (found === activeLine) return;
+    if (found === activeLine) return wakeWords(); // same line, e.g. a seek while paused: still refresh the words once
     activeLine = found;
     lyricsBody.querySelectorAll(".lyric-line").forEach((el, i) => {
       el.classList.toggle("active", i === found);
       el.classList.toggle("past", i < found);
     });
+    // Words of lines that are no longer active drop their live progress (the CSS shows them as fully sung / not yet sung).
+    lyricsBody.querySelectorAll(".w").forEach((word) => word.style.removeProperty("--p"));
+    wakeWords();
     const el = lyricsBody.querySelector(`.lyric-line[data-i="${found}"]`);
     if (el && Date.now() - userScrolledAt > 3500) {
       lyricsBody.scrollTo({ top: el.offsetTop - lyricsBody.clientHeight / 2 + el.clientHeight / 2, behavior: jump ? "auto" : "smooth" });
     }
   }
+
+  /* Word-by-word highlight: while a line is active, each word gets a 0..1 progress that follows the audio clock
+     (read every frame, so it glides instead of stepping 4 times a second). */
+  let wordFrame = 0;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function wordTick() {
+    wordFrame = 0;
+    const line = activeLine >= 0 ? lyricsBody.querySelector(`.lyric-line[data-i="${activeLine}"]`) : null;
+    if (!line || !isOpen(lyricsDrawer) || document.hidden) return;
+    const now = player.getTime().current;
+    for (const word of line.querySelectorAll(".w")) {
+      const start = Number(word.dataset.s);
+      const end = Number(word.dataset.e);
+      let progress = Math.min(1, Math.max(0, (now - start) / Math.max(0.05, end - start)));
+      if (reduceMotion.matches) progress = now >= start ? 1 : 0; // "Reduce motion": light a word up when it starts, no gliding
+      const shown = progress.toFixed(3);
+      if (word.dataset.p !== shown) (word.dataset.p = shown), word.style.setProperty("--p", shown);
+    }
+    if (player.state.playing) wordFrame = requestAnimationFrame(wordTick);
+  }
+  function wakeWords() {
+    if (!wordFrame) wordFrame = requestAnimationFrame(wordTick);
+  }
+  document.addEventListener("visibilitychange", wakeWords); // the loop pauses while the tab is hidden
 
   lyricsBody.addEventListener("click", async (event) => {
     const line = event.target.closest(".lyric-line");
@@ -508,7 +546,7 @@ export function render(view) {
   let renderedQueue = "";
   const renderState = (s) => {
     if (!s.song) return;
-    if (s.playing) viz.wake();
+    if (s.playing) (viz.wake(), wakeWords());
     if (renderedSongId !== s.song.id) {
       if (renderedSongId !== null) {
         // Restart the "drop in" animation for the new song.
@@ -592,6 +630,8 @@ export function render(view) {
 
   return () => {
     unsubscribe.forEach((fn) => fn());
+    cancelAnimationFrame(wordFrame);
+    document.removeEventListener("visibilitychange", wakeWords);
     viz.destroy();
     window.removeEventListener("resize", drawWave);
     document.removeEventListener("keydown", onKey);

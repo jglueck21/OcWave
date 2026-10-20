@@ -36,22 +36,24 @@
 }
 
 :root[data-theme="light"] {
-  --bg: #f2f3f7;
-  --surface: #ffffff;
-  --surface-2: #fbfbfd;
-  --surface-3: #eef0f5;
-  --surface-4: #e3e6ee;
-  --glass: rgba(255, 255, 255, 0.7);
-  --glass-strong: rgba(255, 255, 255, 0.88);
-  --border: rgba(15, 20, 35, 0.08);
-  --border-strong: rgba(15, 20, 35, 0.14);
-  --hover: rgba(15, 20, 35, 0.05);
-  --text: #12141a;
-  --muted: #646b7b;
-  --highlight: inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  --shadow-sm: 0 2px 10px rgba(30, 40, 70, 0.08);
-  --shadow: 0 18px 50px rgba(30, 40, 70, 0.14);
-  --shadow-lg: 0 32px 90px rgba(30, 40, 70, 0.2);
+  /* A soft pearl palette: no pure white, a faint cool tint, and shadows with a hint of indigo, so surfaces read as
+     layered paper and glass instead of flat white. */
+  --bg: #eceef3;
+  --surface: #f9fafc;
+  --surface-2: #f4f6fa;
+  --surface-3: #eaedf3;
+  --surface-4: #dfe3eb;
+  --glass: rgba(250, 251, 254, 0.64);
+  --glass-strong: rgba(247, 249, 252, 0.86);
+  --border: rgba(24, 32, 60, 0.09);
+  --border-strong: rgba(24, 32, 60, 0.16);
+  --hover: rgba(24, 32, 60, 0.055);
+  --text: #14171f;
+  --muted: #5d6475;
+  --highlight: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  --shadow-sm: 0 2px 10px rgba(34, 42, 82, 0.09);
+  --shadow: 0 18px 50px rgba(34, 42, 82, 0.15);
+  --shadow-lg: 0 32px 90px rgba(34, 42, 82, 0.22);
   color-scheme: light;
 }
 
@@ -2702,8 +2704,9 @@ kbd {
   transition: background 0.8s;
 }
 :root[data-theme="light"] .ambient {
-  background: radial-gradient(60vmax 50vmax at 6% -12%, rgba(var(--accent-rgb), 0.12), transparent 62%),
-    radial-gradient(52vmax 46vmax at 104% 112%, rgba(var(--accent-rgb), 0.08), transparent 64%);
+  background: radial-gradient(60vmax 50vmax at 6% -12%, rgba(var(--accent-rgb), 0.13), transparent 62%),
+    radial-gradient(52vmax 46vmax at 104% 112%, rgba(var(--accent-rgb), 0.09), transparent 64%),
+    radial-gradient(40vmax 30vmax at 92% 6%, rgba(148, 128, 220, 0.07), transparent 62%);
 }
 .app {
   position: relative;
@@ -4395,4 +4398,21 @@ button.rank-row:hover {
 }
 .about-text:first-of-type {
   margin-top: 12px;
+}
+
+/* --------------------------- Word-by-word lyrics --------------------------- */
+/* On the active line every word fills from dim to bright as it is sung (--p goes 0 → 1, set by the player).
+   The edge of the fill is slightly soft. Words of other lines just follow the line colour. */
+.lyric-line.active .w {
+  --p: 0;
+  background-image: linear-gradient(
+    90deg,
+    var(--text) 0,
+    var(--text) calc(var(--p) * 116% - 16%),
+    rgba(127, 127, 140, 0.55) calc(var(--p) * 116%)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }

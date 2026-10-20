@@ -5,8 +5,8 @@ import { LANGUAGES, getPreference, setPreference, t } from "../i18n.js";
 import * as player from "../player.js";
 import * as stats from "../stats.js";
 import {
-  ACCENTS, EQ_BANDS, EQ_PRESETS, RECORDS, getAccent, getCrossfade, getDesign, getEq, getLyricsOnline, getMode, getNormalize, getRecord, getSleeve, getVisualizer, getWaveSeek,
-  setAccent, setCrossfade, setDesign, setLyricsOnline, setMode, setNormalize, setRecord, setSleeve, setVisualizer, setWaveSeek,
+  ACCENTS, EQ_BANDS, EQ_PRESETS, RECORDS, getAccent, getCrossfade, getDesign, getEq, getLyricsOnline, getLyricsWords, getMode, getNormalize, getRecord, getSleeve, getVisualizer, getWaveSeek,
+  setAccent, setCrossfade, setDesign, setLyricsOnline, setLyricsWords, setMode, setNormalize, setRecord, setSleeve, setVisualizer, setWaveSeek,
 } from "../prefs.js";
 import { REPO_URL, VERSION } from "../version.js";
 import { confirmDialog, esc, fmtBytes, icon, plural, toast } from "../ui.js";
@@ -116,6 +116,7 @@ export async function render(view) {
 
       <section class="panel">
         <h2>${t("Lyrics")}</h2>
+        ${switchHtml("lyrics-words", "Word-by-word highlighting", "Highlights each word as it is sung. The timing is estimated unless the lyrics file has word timings.")}
         ${switchHtml("lyrics-online", "Find lyrics online", "Looks songs up on lrclib.net (free). Only the title, artist and length are sent, nothing else.")}
       </section>
 
@@ -194,6 +195,7 @@ export async function render(view) {
   drawEq();
   drawCrossfade();
   $("#lyrics-online").checked = getLyricsOnline();
+  $("#lyrics-words").checked = getLyricsWords();
   $("#normalize").checked = getNormalize();
   $("#visualizer").checked = getVisualizer();
   $("#waveseek").checked = getWaveSeek();
@@ -252,6 +254,7 @@ export async function render(view) {
       }
     }
     if (target.id === "lyrics-online") setLyricsOnline(target.checked);
+    if (target.id === "lyrics-words") setLyricsWords(target.checked);
     if (target.id === "visualizer") setVisualizer(target.checked);
     if (target.id === "waveseek") setWaveSeek(target.checked);
     if (target.id === "normalize") {
