@@ -29,6 +29,8 @@
   --rail-gap: 12px;
   --rail-total: calc(var(--rail-w) + var(--rail-gap) * 2);
   --mini-h: 72px;
+  /* Space between the bottom nav bar and the screen edge: half the iPhone home-indicator area plus a little. */
+  --nav-gap: calc(8px + env(safe-area-inset-bottom, 0px) * 0.5);
   --radius: 20px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --spring: cubic-bezier(0.34, 1.4, 0.64, 1);
@@ -164,7 +166,10 @@ img {
 .app {
   display: grid;
   grid-template-columns: var(--rail-total) minmax(0, 1fr);
-  height: 100dvh;
+  /* Fixed to all four edges instead of "height: 100dvh": in an installed iPhone app 100dvh stops short of the
+     bottom edge and leaves an uncovered strip under the navigation bar. */
+  position: fixed;
+  inset: 0;
 }
 
 .rail {
@@ -2005,7 +2010,7 @@ kbd {
     flex-direction: row;
     justify-content: space-around;
     gap: 0;
-    margin: 0 12px calc(10px + env(safe-area-inset-bottom));
+    margin: 0 12px var(--nav-gap);
     padding: 6px 6px;
     border-radius: 26px;
   }
@@ -2024,7 +2029,7 @@ kbd {
   .mini {
     left: 10px;
     right: 10px;
-    bottom: calc(76px + env(safe-area-inset-bottom));
+    bottom: calc(66px + var(--nav-gap));
   }
   .toasts {
     bottom: calc(var(--mini-h) + 100px);
@@ -2709,8 +2714,7 @@ kbd {
     radial-gradient(40vmax 30vmax at 92% 6%, rgba(148, 128, 220, 0.07), transparent 62%);
 }
 .app {
-  position: relative;
-  z-index: 1;
+  z-index: 1; /* above the ambient glow; the position (fixed, full screen) is set in the layout section above */
 }
 /* A touch of film grain over everything makes flat gradients feel richer. */
 body::after {
@@ -3373,7 +3377,7 @@ body[data-route="player"] .topbar {
   .mini {
     left: 10px;
     right: 10px;
-    bottom: calc(92px + env(safe-area-inset-bottom));
+    bottom: calc(82px + var(--nav-gap));
     border-radius: 24px;
   }
   .topbar {
@@ -3455,7 +3459,7 @@ body[data-route="player"] .topbar {
   .mini {
     left: 12px;
     right: 12px;
-    bottom: calc(98px + env(safe-area-inset-bottom));
+    bottom: calc(88px + var(--nav-gap));
     grid-template-columns: minmax(0, 1fr) auto;
   }
 }
@@ -4115,7 +4119,7 @@ html[lang^="pt"] .nav-link {
     right: 12px;
     transform: none;
     max-width: none;
-    bottom: calc(150px + env(safe-area-inset-bottom, 0px));
+    bottom: calc(140px + var(--nav-gap));
   }
   .sel-info {
     flex-shrink: 0;
